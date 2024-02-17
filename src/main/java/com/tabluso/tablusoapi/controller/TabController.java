@@ -1,7 +1,7 @@
 package com.tabluso.tablusoapi.controller;
 
 import com.tabluso.tablusoapi.entity.Tab;
-import com.tabluso.tablusoapi.repository.TabRepository;
+import com.tabluso.tablusoapi.service.tab.TabService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 public class TabController {
 
-    private TabRepository tabRepository;
+    private TabService tabService;
 
     @GetMapping
     public List<Tab> searchTabs(@RequestParam String searchText) {
-        return tabRepository.findByArtistNameContainingOrSongNameContaining(searchText, searchText);
+        return tabService.findTabsByArtistOrSongContainingText(searchText);
     }
 }
